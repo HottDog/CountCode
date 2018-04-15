@@ -23,47 +23,25 @@ public class ParseMachine {
         BLANK,               //空格
     }
 
-    //获取ParseMachine的单例
-    public static class ClassHolder{
-        private static ParseMachine parseMachine ;
-        public static ParseMachine Singleton(){
-            if(parseMachine==null){
-                parseMachine = new ParseMachine();
-            }
-            return parseMachine;
-        }
-    }
 
     //当前状态
     private IStatus _mStatus;
 
-    public static ConstCharNextStatus constCharNextStatus;
-    public static ConstCharStatus constCharStatus;
-    public static IntermediateStatus intermediateStatus;
-    public static IntermediateNextStatus intermediateNextStatus;
-    public static MultiLineCommentEndStatus multiLineCommentEndStatus;
-    public static MultiLineCommentEndNextStatus multiLineCommentEndNextStatus;
-    public static MultiLineCommentStatus multiLineCommentStatus;
-    public static NormalStatus normalStatus;
-    public static SingleLineCommentNextStatus singleLineCommentNextStatus;
-    public static SingleLineCommentStatus singleLineCommentStatus;
-    public static StartStatus startStatus;
+    public static ConstCharNextStatus constCharNextStatus = new ConstCharNextStatus();
+    public static ConstCharStatus constCharStatus= new ConstCharStatus();
+    public static IntermediateStatus intermediateStatus = new IntermediateStatus();
+    public static IntermediateNextStatus intermediateNextStatus = new IntermediateNextStatus();
+    public static MultiLineCommentEndStatus multiLineCommentEndStatus= new MultiLineCommentEndStatus();
+    public static MultiLineCommentEndNextStatus multiLineCommentEndNextStatus= new MultiLineCommentEndNextStatus();
+    public static MultiLineCommentStatus multiLineCommentStatus = new MultiLineCommentStatus();
+    public static NormalStatus normalStatus = new NormalStatus();
+    public static SingleLineCommentNextStatus singleLineCommentNextStatus= new SingleLineCommentNextStatus();
+    public static SingleLineCommentStatus singleLineCommentStatus= new SingleLineCommentStatus();
+    public static StartStatus startStatus= new StartStatus();
 
 
-     ParseMachine(){
-        constCharNextStatus = new ConstCharNextStatus();
-        constCharStatus = new ConstCharStatus();
-        intermediateStatus = new IntermediateStatus();
-        intermediateNextStatus = new IntermediateNextStatus();
-        multiLineCommentEndStatus = new MultiLineCommentEndStatus();
-        multiLineCommentEndNextStatus = new MultiLineCommentEndNextStatus();
-        multiLineCommentStatus = new MultiLineCommentStatus();
-        normalStatus = new NormalStatus();
-        singleLineCommentNextStatus = new SingleLineCommentNextStatus();
-        singleLineCommentStatus = new SingleLineCommentStatus();
-        startStatus = new StartStatus();
-
-        _mStatus = startStatus;
+     public ParseMachine(){
+        _mStatus = startStatus;    //每个文本初始状态是StartStatus
     }
 
     public Action ParseAction(char s){
@@ -95,7 +73,7 @@ public class ParseMachine {
 //        System.out.print("action:"+ action.toString()+"  ");
 //        System.out.print(_mStatus.toString());
         _mStatus = _mStatus.Transform(action);
-        System.out.print("->"+_mStatus.toString()+"   ");
+//        System.out.print("->"+_mStatus.toString()+"   ");
     }
 
     public IStatus GetStatus(){
