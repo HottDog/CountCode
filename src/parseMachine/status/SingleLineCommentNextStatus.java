@@ -13,7 +13,7 @@ public class SingleLineCommentNextStatus implements IStatus{
             case LINE_CONTINUATION:
                 return ParseMachine.singleLineCommentNextStatus;
             default:
-                System.out.println("下一行还是注释行");
+//                System.out.println("下一行还是注释行");
                 return ParseMachine.singleLineCommentStatus;
         }
     }

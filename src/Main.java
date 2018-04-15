@@ -15,13 +15,21 @@ public class Main {
 
     //线程数量
     public static final int THREAD_NUM = 4;
+//    public static int over_count=1;
     public static void main(String []args) throws FileNotFoundException {
         //解析处理文件夹路径
+//        System.out.print(args[0]);
         FilePool.GetInstance().ProcessFilePath(TEST_FILES_PATH);
         TaskOverListener listener = new TaskOverListener() {
             @Override
             public void TaskOver() {
-                StatisticCodes.GetInstance().print();
+                if(StatisticCodes.GetInstance().IsOver()) {
+                    StatisticCodes.GetInstance().PrintContent();
+                    System.exit(0);
+
+                }else {
+                    StatisticCodes.GetInstance().Increse();
+                }
             }
         };
         for(int i=0;i<THREAD_NUM;i++){

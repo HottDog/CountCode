@@ -21,7 +21,8 @@ public class JudgeCode{
     }
 
     public void Judge(File file) throws FileNotFoundException {
-        Scanner scanner = new Scanner(file);
+
+        Scanner scanner = new Scanner(file,"utf-8");
         boolean isEffect = false;    //标记是否是有效行
         boolean isComment = false;   //标记是否是注释行
         boolean isEmpty = true;      //标记是否是空行
@@ -69,7 +70,15 @@ public class JudgeCode{
                 if(isEmpty)
                     emptyCount++;
             }
+
         }
+        String tempS = "file:"+file.getName()+" "+
+        "total:"+totalCount+" "+
+        "empty:"+emptyCount+" "+
+        "effective:"+effectiveCount+" "+
+        "comment:"+commentCount;
+        StatisticCodes.GetInstance().AddContent(tempS);
+
     }
 
     public int getTotalCount() {

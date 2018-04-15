@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
  * 使用线程池来维护线程的生命周期
  */
 public class ThreadPool {
+
     private static class ThreadPoolExecutorHolder{
         public static ThreadPoolExecutor threadPoolExecutor=new ThreadPoolExecutor(
                 20,40,3, TimeUnit.SECONDS,new ArrayBlockingQueue<Runnable>(50)
@@ -18,4 +19,6 @@ public class ThreadPool {
     public static ThreadPoolExecutor getInstance(){
         return ThreadPool.ThreadPoolExecutorHolder.threadPoolExecutor;
     }
+
+
 }
