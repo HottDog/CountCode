@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by 袁江超 on 2018/4/15.
@@ -7,7 +8,8 @@ import java.util.ArrayList;
  */
 public class StatisticCodes {
     //统计下结束的线程
-    private int over_count=1;
+    private static AtomicInteger over_count=  new AtomicInteger(1);
+
 
     private int totalCount = 0;             //总行数
     private int emptyCount= 0;              //空行数
@@ -75,12 +77,8 @@ public class StatisticCodes {
         System.out.println("comment:"+commentCount);
     }
 
-    public synchronized void Increse(){
-        over_count++;
-    }
-
     public synchronized boolean IsOver(){
-        if(over_count==Main.THREAD_NUM){
+        if(over_count.getAndIncrement()==Main.THREAD_NUM){
             return true;
         }else {
             return false;
